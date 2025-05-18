@@ -1,0 +1,42 @@
+--[[ 
+    屏幕文字显示脚本 by ChatGPT
+    使用：将此 LocalScript 放入 StarterPlayer → StarterPlayerScripts
+--]]
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- 创建 ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MessageGui"
+screenGui.ResetOnSpawn = true
+screenGui.Parent = playerGui
+
+-- 创建并设置 TextLabel
+local textLabel = Instance.new("TextLabel")
+textLabel.Name = "MessageLabel"
+textLabel.Size = UDim2.new(0.5, 0, 0.1, 0)      -- 占据屏幕宽度 50%、高度 10%
+textLabel.Position = UDim2.new(0.25, 0, 0.45, 0) -- 居中
+textLabel.BackgroundTransparency = 0.5          -- 半透明背景
+textLabel.BackgroundColor3 = Color3.new(0, 0, 0)
+textLabel.TextColor3 = Color3.new(1, 1, 1)
+textLabel.Font = Enum.Font.SourceSansBold
+textLabel.TextSize = 36
+textLabel.Text = "我操你妈逼🤓"                -- 这里修改你想显示的文字
+textLabel.TextWrapped = true                    -- 自动换行
+textLabel.Parent = screenGui
+
+-- 显示时长（秒）
+local displayTime = 5
+
+-- 延迟后淡出并销毁
+delay(displayTime, function()
+    if textLabel and textLabel.Parent then
+        -- 向上移动并收缩高度
+        textLabel:TweenPosition(UDim2.new(0.25, 0, 0.3, 0), "Out", "Quad", 1, true)
+        textLabel:TweenSize(UDim2.new(0.5, 0, 0.05, 0), "Out", "Quad", 1, true)
+        wait(1)
+        screenGui:Destroy()
+    end
+end)
